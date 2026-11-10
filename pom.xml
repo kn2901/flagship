@@ -16,7 +16,7 @@
     <artifactId>feature-flags</artifactId>
     <version>0.1.0</version>
     <name>feature-flags</name>
-    <description>A simplified LaunchDarkly-style feature flag service</description>
+    <description>Feature flag service with targeting rules, percentage rollouts, Redis caching and audit logs</description>
 
     <properties>
         <java.version>21</java.version>
