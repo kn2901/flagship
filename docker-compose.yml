@@ -1,0 +1,30 @@
+# Starts PostgreSQL and Redis for the "docker" profile:
+#   docker compose up -d
+#   ./mvnw spring-boot:run -Dspring-boot.run.profiles=docker
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: featureflags
+      POSTGRES_USER: featureflags
+      POSTGRES_PASSWORD: featureflags
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U featureflags"]
+      interval: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  postgres-data:
